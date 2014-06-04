@@ -10,6 +10,15 @@ To render as SVG (produces an XML string):
 
   svg = Viz("digraph { a -> b; }", "svg");
 
+See examples here:
+
+  http://mdaines.github.io/viz.js/example.html
+  http://mdaines.github.io/viz.js/form.html
+
+Compiled versions are available on the releases page:
+
+  https://github.com/mdaines/viz.js/releases
+
 This project is based on work by Satoshi Ueyama and Brenton Partridge:
 
   https://github.com/gyuque/livizjs
