@@ -1,4 +1,7 @@
 window["Viz"] = function(src, format, engine) {
+  if (typeof(format) === 'undefined') {
+    format = 'svg';
+  }
   if (typeof(engine) === 'undefined') {
     engine = 'dot';
   }
