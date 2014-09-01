@@ -24,7 +24,7 @@ LIBSBC= \
 	$(SRCDIR)/plugin/core/libgvplugin_core-em.bc \
 	$(SRCDIR)/plugin/dot_layout/libgvplugin_dot_layout-em.bc \
 	$(SRCDIR)/plugin/neato_layout/libgvplugin_neato_layout-em.bc
-VIZOPTS=-v -O2 -s ASM_JS=1 --closure 1
+VIZOPTS=-v -O2 -s ASM_JS=1 --closure 1 --memory-init-file 0
 LIBOPTS=-O2
 
 viz.js: $(SRCDIR) viz.c $(LIBSBC) post.js pre.js
