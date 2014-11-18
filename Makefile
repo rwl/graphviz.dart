@@ -24,8 +24,8 @@ LIBSBC= \
 	$(SRCDIR)/plugin/core/libgvplugin_core-em.bc \
 	$(SRCDIR)/plugin/dot_layout/libgvplugin_dot_layout-em.bc \
 	$(SRCDIR)/plugin/neato_layout/libgvplugin_neato_layout-em.bc
-VIZOPTS=-v -O2 -s ASM_JS=1 --closure 1 --memory-init-file 0
-LIBOPTS=-O2
+VIZOPTS=-v -Oz --llvm-opts 1 --llvm-lto 1 -s ASM_JS=1 --closure 1 --memory-init-file 0
+LIBOPTS=-Oz
 
 viz.js: $(SRCDIR) viz.c $(LIBSBC) post.js pre.js
 	$(EMCC) $(VIZOPTS) -s EXPORTED_FUNCTIONS='["_vizRenderFromString"]' -o viz.js -I$(SRCDIR)/lib/gvc -I$(SRCDIR)/lib/common -I$(SRCDIR)/lib/pathplan -I$(SRCDIR)/lib/cdt -I$(SRCDIR)/lib/cgraph -I$(EPSRCDIR)/lib viz.c $(LIBSBC) --pre-js pre.js --post-js post.js
