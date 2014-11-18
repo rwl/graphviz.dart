@@ -1,0 +1,23 @@
+gvrender_core_pic.c:
+--- gvrender_core_pic.c	2014-11-18 14:44:52.000000000 +0300
++++ gvrender_core_pic.c.patched	2014-11-18 14:45:09.000000000 +0300
+@@ -34,6 +34,8 @@
+ 
+ #define PIC_COORDS_PER_LINE (16)        /* to avoid stdio BUF overflow */
+ 
++int colorxlate(char *str, gvcolor_t * color, color_type_t target_type);
++
+ typedef enum { FORMAT_PIC, } format_type;
+ 
+ static int BezierSubdivision = 10;
+gvloadimage_core.c:
+--- gvloadimage_core.c	2014-11-18 14:51:54.000000000 +0300
++++ gvloadimage_core.c.patched	2014-11-18 14:52:41.000000000 +0300
+@@ -24,6 +24,7 @@
+ #ifdef _MSC_VER
+ #include <io.h>
+ #endif
++#include <unistd.h>
+ 
+ #include "gvplugin_loadimage.h"
+ #include "agxbuf.h"
