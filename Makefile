@@ -45,7 +45,7 @@ $(SRCDIR)/lib/cdt/libcdt-em.bc:
 	cd $(SRCDIR)/lib/cdt; $(EMCC) $(LIBOPTS) -o libcdt-em.bc -DHAVE_CONFIG_H -I. -I../.. -I../../.. dtclose.c dtdisc.c dtextract.c dtflatten.c dthash.c dtlist.c dtmethod.c dtopen.c dtrenew.c dtrestore.c dtsize.c dtstat.c dtstrhash.c dttree.c dttreeset.c dtview.c dtwalk.c
 
 $(SRCDIR)/lib/common/libcommon-em.bc:
-	cd $(SRCDIR)/lib/common; $(EMCC) $(LIBOPTS) -o libcommon-em.bc -DHAVE_CONFIG_H -DHAVE_EXPAT_H -DHAVE_EXPAT -I. -I.. -I../.. -I../../.. -I../gvc -I../pathplan -I../cdt -I../cgraph -I../fdpgen -I../label -I../xdot -I../../../$(EPSRCDIR)/lib args.c arrows.c colxlate.c ellipse.c emit.c geom.c globals.c htmllex.c htmlparse.c htmltable.c input.c intset.c labels.c memory.c ns.c output.c pointset.c postproc.c psusershape.c routespl.c shapes.c splines.c strcasecmp.c strncasecmp.c taper.c textspan.c timing.c utils.c
+	cd $(SRCDIR)/lib/common; $(EMCC) $(LIBOPTS) -o libcommon-em.bc -DHAVE_CONFIG_H -DHAVE_EXPAT_H -DHAVE_EXPAT -I. -I.. -I../.. -I../../.. -I../gvc -I../pathplan -I../cdt -I../cgraph -I../fdpgen -I../label -I../xdot -I../../../$(EPSRCDIR)/lib args.c arrows.c colxlate.c ellipse.c emit.c geom.c globals.c htmllex.c htmlparse.c htmltable.c input.c intset.c labels.c memory.c ns.c output.c pointset.c postproc.c psusershape.c routespl.c shapes.c splines.c taper.c textspan.c timing.c utils.c
 
 $(SRCDIR)/lib/xdot/libxdot-em.bc:
 	cd $(SRCDIR)/lib/xdot; $(EMCC) $(LIBOPTS) -o libxdot-em.bc -DHAVE_CONFIG_H -I. -I.. -I../.. -I../../.. -I../common -I../gvc -I../pathplan -I../cdt -I../cgraph xdot.c
@@ -84,7 +84,7 @@ $(SRCDIR)/lib/label/liblabel-em.bc:
 	cd $(SRCDIR)/lib/label; $(EMCC) $(LIBOPTS) -o liblabel-em.bc -DHAVE_CONFIG_H -I. -I../cdt -I../gvc -I../cgraph -I../../.. -I../common -I../pathplan index.c node.c rectangle.c split.q.c xlabels.c
 	
 $(SRCDIR)/lib/gvc/libgvc-em.bc:
-	cd $(SRCDIR)/lib/gvc; $(EMCC) $(LIBOPTS) -o libgvc-em.bc -DHAVE_CONFIG_H -I. -I.. -I../.. -I../../.. -I../common -I../pathplan -I../cdt -I../cgraph gvbuffstderr.c gvc.c gvconfig.c gvcontext.c gvdevice.c gvevent.c gvjobs.c gvlayout.c gvloadimage.c gvplugin.c gvrender.c gvtextlayout.c gvusershape.c
+	cd $(SRCDIR)/lib/gvc; $(EMCC) $(LIBOPTS) -o libgvc-em.bc -DHAVE_CONFIG_H -I. -I.. -I../.. -I../../.. -I../../../zlib  -I../common -I../pathplan -I../cdt -I../cgraph gvbuffstderr.c gvc.c gvconfig.c gvcontext.c gvdevice.c gvevent.c gvjobs.c gvlayout.c gvloadimage.c gvplugin.c gvrender.c gvtextlayout.c gvusershape.c
 
 $(SRCDIR)/lib/pathplan/libpathplan-em.bc:
 	cd $(SRCDIR)/lib/pathplan; $(EMCC) $(LIBOPTS) -o libpathplan-em.bc -DHAVE_CONFIG_H -I. -I../../.. cvt.c inpoly.c route.c shortest.c shortestpth.c solvers.c triang.c util.c visibility.c
