@@ -1,4 +1,4 @@
-EMCC=$(CURDIR)/emscripten/emcc
+EMCC:=$(shell if command -v emcc > /dev/null; then echo "emcc"; else echo "$(EMSCRIPTEN_ROOT)/emcc"; fi)
 SRCDIR=graphviz-src
 EPSRCDIR=libexpat-src
 ZLIBDIR=zlib
@@ -26,9 +26,13 @@ LIBSBC= \
 	$(SRCDIR)/plugin/neato_layout/libgvplugin_neato_layout-em.bc
 VIZOPTS=-v -Oz --llvm-opts 1 --llvm-lto 1 -s ASM_JS=1 --closure 1 --memory-init-file 0
 LIBOPTS=-Oz
+LIBDIR=$(CURDIR)/lib
+VIZJS=$(LIBDIR)/viz.js
 
-viz.js: $(SRCDIR) viz.c $(LIBSBC) post.js pre.js
-	$(EMCC) $(VIZOPTS) -s EXPORTED_FUNCTIONS='["_vizRenderFromString"]' -o viz.js -I$(SRCDIR)/lib/gvc -I$(SRCDIR)/lib/common -I$(SRCDIR)/lib/pathplan -I$(SRCDIR)/lib/cdt -I$(SRCDIR)/lib/cgraph -I$(EPSRCDIR)/lib viz.c $(LIBSBC) --pre-js pre.js --post-js post.js
+all: $(VIZJS)
+
+$(VIZJS): $(SRCDIR) viz.c $(LIBSBC) post.js pre.js $(LIBDIR)
+	$(EMCC) $(VIZOPTS) -s EXPORTED_FUNCTIONS='["_vizRenderFromString"]' -o $(VIZJS) -I$(SRCDIR)/lib/gvc -I$(SRCDIR)/lib/common -I$(SRCDIR)/lib/pathplan -I$(SRCDIR)/lib/cdt -I$(SRCDIR)/lib/cgraph -I$(EPSRCDIR)/lib viz.c $(LIBSBC) --pre-js pre.js --post-js post.js
 
 set_verbose_emscripten:
 	$(eval VIZOPTS += -s VERBOSE=1)
@@ -38,7 +42,7 @@ verbose: set_verbose_emscripten viz.js
 $(EPSRCDIR)/lib/lib-em.bc: $(EPSRCDIR)
 	cd $(EPSRCDIR)/lib; $(EMCC) $(LIBOPTS) -o lib-em.bc -I. -I.. -DHAVE_BCOPY -DHAVE_CONFIG_H xmlparse.c xmlrole.c xmltok.c
 
-$(ZLIBDIR)/libz-em.bc: $(SRCDIR)
+$(ZLIBDIR)/libz-em.bc: $(ZLIBDIR)
 	cd $(ZLIBDIR); $(EMCC) $(LIBOPTS) -o libz-em.bc -D_LARGEFILE64_SOURCE=1 -DHAVE_HIDDEN -D_FILE_OFFSET_BITS=64 -I. adler32.c compress.c crc32.c deflate.c gzclose.c gzlib.c gzread.c gzwrite.c infback.c inffast.c inflate.c inftrees.c trees.c uncompr.c zutil.c
 
 $(SRCDIR)/lib/cdt/libcdt-em.bc: $(SRCDIR)
@@ -108,19 +112,31 @@ $(EPSRCDIR): | expat-2.1.0.tar.gz
 	mkdir -p $(EPSRCDIR)
 	tar xf expat-2.1.0.tar.gz -C $(EPSRCDIR) --strip=1
 
+$(ZLIBDIR): | zlib-1.2.8.tar.gz
+	mkdir -p $(ZLIBDIR)
+	tar xf zlib-1.2.8.tar.gz -C $(ZLIBDIR) --strip=1
+
+$(LIBDIR):
+	mkdir -p $(LIBDIR)
+
 graphviz-2.36.0.tar.gz:
 	curl "http://www.graphviz.org/pub/graphviz/stable/SOURCES/graphviz-2.36.0.tar.gz" -o graphviz-2.36.0.tar.gz
 
 expat-2.1.0.tar.gz:
 	curl -L "http://sourceforge.net/projects/expat/files/expat/2.1.0/expat-2.1.0.tar.gz/download" -o expat-2.1.0.tar.gz
 
+zlib-1.2.8.tar.gz:
+	curl -L "http://zlib.net/zlib-1.2.8.tar.gz" -o zlib-1.2.8.tar.gz
+
 clean:
 	rm -f $(SRCDIR)/lib/*/*.bc
 	rm -f $(SRCDIR)/plugin/*/*.bc
 	rm -f $(EPSRCDIR)/lib/*.bc
 	rm -f $(ZLIBDIR)/*.bc
-	rm -f viz.js
+	rm -f $(VIZJS)
 
-clobber: clean
+purge: clean
 	rm -rf $(SRCDIR)
 	rm -rf $(EPSRCDIR)
+	rm -rf $(ZLIBDIR)
+
