@@ -5,3 +5,4 @@ libexpat-src
 pubspec.lock
 .pub/
 packages/
+example/packages
