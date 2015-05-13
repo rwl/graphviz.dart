@@ -1,7 +1,7 @@
 name: graphviz
 version: 0.0.1
 author: Richard Lincoln <r.w.lincoln@gmail.com>
-description: Emscripten module for GraphViz
+description: Emscripten module for Graphviz
 homepage: https://github.com/rwl/graphviz.dart
 environment:
   sdk: '>=1.8.0 <2.0.0'
