@@ -9,15 +9,15 @@ To render as SVG (produces an XML string):
 
 See examples here:
 
-  http://rwl.github.io/graphviz.dart/example.html  
-  http://rwl.github.io/graphviz.dart/form.html
+- [Example](http://rwl.github.io/graphviz.dart/example.html)
+- [Form](http://rwl.github.io/graphviz.dart/form.html)
 
 This project is based on work by Mike Daines, Satoshi Ueyama and Brenton
 Partridge:
 
-  https://github.com/mdaines/viz.js  
-  https://github.com/gyuque/livizjs  
-  https://github.com/bpartridge/graphviz.js
+- [viz.js](https://github.com/mdaines/viz.js)
+- [livizjs](https://github.com/gyuque/livizjs)
+- [graphviz.js](https://github.com/bpartridge/graphviz.js)
 
 Thanks to the following contributors:
 
@@ -30,4 +30,3 @@ Thanks to the following contributors:
 [Dart]: https://www.dartlang.org/
 [Emscripten]: http://emscripten.org/
 [Graphviz]: http://www.graphviz.org/
-
