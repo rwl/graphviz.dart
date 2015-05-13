@@ -1,0 +1,14 @@
+name: graphviz
+version: 0.0.1
+author: Richard Lincoln <r.w.lincoln@gmail.com>
+description: Emscripten module for GraphViz
+homepage: https://github.com/rwl/graphviz.dart
+environment:
+  sdk: '>=1.8.0 <2.0.0'
+dependencies:
+dev_dependencies:
+  browser: '>=0.10.0+2 <0.11.0'
+transformers:
+- $dart2js:
+    commandLineOptions:
+    - --enable-enum
