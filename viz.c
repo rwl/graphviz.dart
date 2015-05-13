@@ -53,13 +53,13 @@ __attribute__((used)) char* vizRenderFromString(const char *string,
   }
 
   if (gvParseArgs(context, sizeof(argv) / sizeof(argv[0]), (char**)argv)) {
-    fprintf(stderr, "viz.js: failed to set the engine or the output format\n");
+    fprintf(stderr, "graphviz.js: failed to set the engine or the output format\n");
     return NULL;
   }
 
   Agraph_t *graph = agmemread((char*)string);
   if (!graph) {
-    fprintf(stderr, "viz.js: failed to parse the supplied graph string\n");
+    fprintf(stderr, "graphviz.js: failed to parse the supplied graph string\n");
     return NULL;
   }
   gvLayoutJobs(context, graph);

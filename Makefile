@@ -27,7 +27,7 @@ LIBSBC= \
 VIZOPTS=-v -Oz --llvm-opts 1 --llvm-lto 1 -s ASM_JS=1 --closure 1 --memory-init-file 0
 LIBOPTS=-Oz
 LIBDIR=$(CURDIR)/lib
-VIZJS=$(LIBDIR)/viz.js
+VIZJS=$(LIBDIR)/graphviz.js
 
 all: $(VIZJS)
 
@@ -37,7 +37,7 @@ $(VIZJS): $(SRCDIR) viz.c $(LIBSBC) post.js pre.js $(LIBDIR)
 set_verbose_emscripten:
 	$(eval VIZOPTS += -s VERBOSE=1)
 
-verbose: set_verbose_emscripten viz.js
+verbose: set_verbose_emscripten $(VIZJS)
 
 $(EPSRCDIR)/lib/lib-em.bc: $(EPSRCDIR)
 	cd $(EPSRCDIR)/lib; $(EMCC) $(LIBOPTS) -o lib-em.bc -I. -I.. -DHAVE_BCOPY -DHAVE_CONFIG_H xmlparse.c xmlrole.c xmltok.c

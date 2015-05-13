@@ -1,4 +1,4 @@
-window["Viz"] = function(src, format, engine, options) {
+var Graphviz = function(src, format, engine, options) {
   if (typeof(format) === 'undefined') {
     format = 'svg';
   }
