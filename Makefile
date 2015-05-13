@@ -24,8 +24,9 @@ LIBSBC= \
 	$(SRCDIR)/plugin/core/libgvplugin_core-em.bc \
 	$(SRCDIR)/plugin/dot_layout/libgvplugin_dot_layout-em.bc \
 	$(SRCDIR)/plugin/neato_layout/libgvplugin_neato_layout-em.bc
-VIZOPTS=-v -Oz --llvm-opts 1 --llvm-lto 1 -s ASM_JS=1 --closure 1 --memory-init-file 0
-LIBOPTS=-Oz
+OPTFLAG=-Oz
+VIZOPTS=-v $(OPTFLAG) --memory-init-file 0
+LIBOPTS=$(OPTFLAG)
 LIBDIR=$(CURDIR)/lib
 VIZJS=$(LIBDIR)/graphviz.js
 
