@@ -1,5 +1,6 @@
 graphviz-src
 libexpat-src
+zlib
 *.tar.gz
 
 pubspec.lock

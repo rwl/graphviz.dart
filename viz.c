@@ -20,7 +20,7 @@ __attribute__((used)) char* vizRenderFromString(const char *string,
   }
 
   // First pass - count the number of extra options separated with '|'
-  fprintf(stderr, "options is \"%s\"\n", options);
+//  fprintf(stderr, "options is \"%s\"\n", options);
   int options_count = 0;
   if (options && options[0]) {
     char current;
@@ -30,7 +30,7 @@ __attribute__((used)) char* vizRenderFromString(const char *string,
       }
     }
     options_count++;
-    fprintf(stderr, "Found %d options\n", options_count);
+//    fprintf(stderr, "Found %d options\n", options_count);
   }
   // Second pass - fill all the options
   const char *argv[3 + options_count];

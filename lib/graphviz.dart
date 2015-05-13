@@ -12,8 +12,8 @@ enum Layout {
 
 String graphviz(String dotData, {Render render: Render.SVG,
   Layout layout: Layout.DOT, List<String> options, js.JsObject context}) {
-  var format = render.toString().split('.').last.toLowerCase();
-  var engine = layout.toString().split('.').last.toLowerCase();
-  var ctx = context != null ? context : js.context;
+  String format = render.toString().split('.').last.toLowerCase();
+  String engine = layout.toString().split('.').last.toLowerCase();
+  js.JsObject ctx = (context != null) ? context : js.context;
   return ctx.callMethod("Graphviz", [dotData, format, engine, options]);
 }

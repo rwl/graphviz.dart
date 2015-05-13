@@ -66,18 +66,19 @@
         SelectElement format = document.getElementById("format");
         SelectElement engine = document.getElementById("engine");
 
-        var result = graphviz(input.value, render: formats[format.value],
-            layout: engines[engine.value]);
+        Render render = formats[format.value];
+        Layout layout = engines[engine.value];
+        var result = graphviz(input.value, render: render, layout: layout);
 
         DivElement output = document.getElementById("output");
-        output.children.forEach((c) => c.remove());
-        if (format == Render.SVG) {
+        output.children.toList().forEach((c) => c.remove());
+        if (render == Render.SVG) {
           final doc = new DomParser().parseFromString(result, 'text/xml');
           output.append(document.importNode(doc.documentElement, true));
         }
 
         DivElement inspectNode = document.getElementById("inspect");
-        inspectNode.children.forEach((c) => c.remove());
+        inspectNode.children.toList().forEach((c) => c.remove());
         inspectNode.append(inspect(result));
       });
     }
