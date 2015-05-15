@@ -1,16 +1,19 @@
-graphviz.dart
-=============
+# graphviz.dart
 
 A [Dart][] package and [Emscripten][] module for [Graphviz][].
+
+## Usage
 
 To render as SVG (produces an XML string):
 
     var svg = graphviz("digraph { a -> b; }", render: Render.SVG);
 
-See examples here:
+## Examples
 
-- [Example](http://rwl.github.io/graphviz.dart/example.html)
+- [Web Worker](http://rwl.github.io/graphviz.dart/example.html)
 - [Form](http://rwl.github.io/graphviz.dart/form.html)
+
+## Credits
 
 This project is based on work by Mike Daines, Satoshi Ueyama and Brenton
 Partridge:
