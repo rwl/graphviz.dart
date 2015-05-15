@@ -1,4 +1,3 @@
-
 import 'dart:html';
 import 'package:graphviz/graphviz.dart';
 import 'package:graphviz/graphs.dart';
@@ -12,17 +11,13 @@ var formats = {
   'xdot': Render.XDOT
 };
 
-var engines = {
-  'dot': Layout.DOT,
-  'neato': Layout.NEATO
-};
+var engines = {'dot': Layout.DOT, 'neato': Layout.NEATO};
 
 main() {
   TextAreaElement input = document.getElementById("input");
   input.value = cluster;
 
   document.getElementById("generate").onClick.listen((e) {
-
     SelectElement format = document.getElementById("format");
     SelectElement engine = document.getElementById("engine");
 

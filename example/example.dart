@@ -1,4 +1,3 @@
-
 import 'dart:html';
 import 'dart:async';
 import 'package:graphviz/graphviz.dart';
@@ -6,7 +5,8 @@ import 'package:graphviz/graphs.dart';
 
 Node inspect(String s) => new Element.pre()..appendText(s);
 
-Future<Node> example(Graphviz gv, String dotData, Render format, [Layout engine=Layout.DOT]) {
+Future<Node> example(Graphviz gv, String dotData, Render format,
+    [Layout engine = Layout.DOT]) {
   var result;
   return gv.layout(dotData, render: format, layout: engine).then((result) {
     if (format == Render.SVG) {
@@ -50,7 +50,8 @@ main() {
   });
 
   example(gv2, process, Render.SVG, Layout.NEATO).then((node) {
-    document.body.appendHtml("<h1>Process States (svg output, neato engine)</h1>");
+    document.body
+        .appendHtml("<h1>Process States (svg output, neato engine)</h1>");
     document.body.append(node);
   });
 
