@@ -7,16 +7,29 @@ A [Dart][] package and [Emscripten][] module for [Graphviz][].
 To render as SVG (produces an XML string):
 
     var svg = graphviz("digraph { a -> b; }", render: Render.SVG);
+    
+### Asynchronous API
+
+To prevent UI freeze graph layout may be computed in a separate
+thread using Web Workers:
+
+    var gv = new Graphviz();
+    gv.layout("digraph { a -> b; }").then((String result) {
+      print(result);
+    });
 
 ## Examples
 
 - [Web Worker](http://rwl.github.io/graphviz.dart/example.html)
 - [Form](http://rwl.github.io/graphviz.dart/form.html)
 
+Try comparing page load and refresh times between Firefox and other
+browsers.
+
 ## Credits
 
-This project is based on work by Mike Daines, Satoshi Ueyama and Brenton
-Partridge:
+This project is based on work by Mike Daines, Satoshi Ueyama and
+Brenton Partridge:
 
 - [viz.js](https://github.com/mdaines/viz.js)
 - [livizjs](https://github.com/gyuque/livizjs)
