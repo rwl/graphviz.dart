@@ -6,17 +6,21 @@ A [Dart][] package and [Emscripten][] module for [Graphviz][].
 
 To render as SVG (produces an XML string):
 
-    var svg = graphviz("digraph { a -> b; }", render: Render.SVG);
-    
+```dart
+var svg = graphviz("digraph { a -> b; }", render: Render.SVG);
+```
+
 ### Asynchronous API
 
 To prevent UI freeze graph layout may be computed in a separate
 thread using Web Workers:
 
-    var gv = new Graphviz();
-    gv.layout("digraph { a -> b; }").then((String result) {
-      print(result);
-    });
+```dart
+var gv = new Graphviz();
+gv.layout("digraph { a -> b; }").then((String result) {
+  print(result);
+});
+```
 
 ## Examples
 
@@ -37,10 +41,10 @@ Brenton Partridge:
 
 Thanks to the following contributors:
 
-  jbogard  
-  KylePDavis  
-  siefkenj  
-  srathbun  
+  jbogard
+  KylePDavis
+  siefkenj
+  srathbun
   vmarkovtsev
 
 [Dart]: https://www.dartlang.org/
