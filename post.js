@@ -6,24 +6,34 @@
 if (this.document === undefined) {
   // Web Worker mode
   
-  // Incoming message = { payload : { source, format, engine, options },
-  //   workerHandle }
-  // Outgoing message = { payload : "", workerHandle }
+  // Incoming message = [ workerHandle, [ source, format, engine, options ] ]
+  // Outgoing message = [ workerHandle, output ]
+  // Outgoing message = [ workerHandle, [ error_type, error ] ]
 
   // workerHandle is a random Number (assigned by the host) to match 
   // request and response.
 
   this.onmessage = function (event) {
-    var payload = event["data"]["payload"];
+    if (!Array.isArray(obj)) {
+      postMessage("internal error: expected array");
+      return;
+    }
+
+    var handle = event["data"][0];
+    var payload = event["data"][1];
+    if (handle === undefined && payload === undefined) {
+      postMessage("internal error: no payload");
+      return;
+    }
+
     var result;
     try {
-      result = { "payload" : Graphviz(payload["source"], payload["format"],
-        payload["engine"], payload["options"]) };
+      result = Graphviz(payload[0], payload[1], payload[2], payload[3]);
     } catch (error) {
-      result = { "error" : error };
+      result = [ "graphviz error", error.toString() ];
     }
-    result["workerHandle"] = event["data"]["workerHandle"];
-    this.postMessage(result);
+    var msg = [handle, result];
+    this.postMessage(msg);
   }
 }
 

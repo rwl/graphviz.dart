@@ -35,11 +35,6 @@ class Graphviz {
     String format = _renderString(render);
     String engine = _layoutString(layout);
 
-    return _worker.send({
-      'source': dotData,
-      'format': format,
-      'engine': engine,
-      'options': options
-    });
+    return _worker.send([dotData, format, engine]);
   }
 }
