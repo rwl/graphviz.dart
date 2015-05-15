@@ -14,7 +14,7 @@ if (this.document === undefined) {
   // request and response.
 
   this.onmessage = function (event) {
-    if (!Array.isArray(obj)) {
+    if (!Array.isArray(event["data"])) {
       postMessage("internal error: expected array");
       return;
     }
