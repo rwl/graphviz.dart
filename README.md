@@ -30,6 +30,21 @@ gv.layout("digraph { a -> b; }").then((String result) {
 Try comparing page load and refresh times between [Firefox][] and
 other browsers.
 
+## Development
+
+Set the current Emscripten path:
+
+```sh
+cd /path/to/emsdk_portable/
+source ./emsdk_env.sh
+```
+
+Build the Graphviz Emscripten module:
+
+```sh
+emmake make clean all
+```
+
 ## Credits
 
 This project is based on work by Mike Daines, Satoshi Ueyama and
