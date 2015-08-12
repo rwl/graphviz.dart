@@ -8,3 +8,6 @@ pubspec.lock
 packages/
 example/packages
 build/
+
+.project
+.settings
