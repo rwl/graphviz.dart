@@ -27,8 +27,8 @@ gv.layout("digraph { a -> b; }").then((String result) {
 - [Web Worker](http://rwl.github.io/graphviz.dart/example.html)
 - [Form](http://rwl.github.io/graphviz.dart/form.html)
 
-Try comparing page load and refresh times between Firefox and other
-browsers.
+Try comparing page load and refresh times between [Firefox][] and
+other browsers.
 
 ## Credits
 
@@ -50,3 +50,4 @@ Thanks to the following contributors:
 [Dart]: https://www.dartlang.org/
 [Emscripten]: http://emscripten.org/
 [Graphviz]: http://www.graphviz.org/
+[Firefox]: https://www.mozilla.org/en-US/firefox/android/
