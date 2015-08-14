@@ -30,10 +30,9 @@ if (this.document === undefined) {
     try {
       result = Graphviz(payload[0], payload[1], payload[2], payload[3]);
     } catch (error) {
-      result = [ "graphviz error", error.toString() ];
+      result = [ "error", error.toString() ];
     }
     var msg = [handle, result];
     this.postMessage(msg);
   }
 }
-
