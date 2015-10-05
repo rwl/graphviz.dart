@@ -6,6 +6,7 @@ zlib
 pubspec.lock
 .pub/
 packages/
+.packages
 example/packages
 build/
 
