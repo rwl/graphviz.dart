@@ -4,14 +4,9 @@
 }
 
 if (this.document === undefined) {
-  // Web Worker mode
-  
-  // Incoming message = [ workerHandle, [ source, format, engine, options ] ]
-  // Outgoing message = [ workerHandle, output ]
-  // Outgoing message = [ workerHandle, [ error_type, error ] ]
-
-  // workerHandle is a random Number (assigned by the host) to match 
-  // request and response.
+  // input  = [ id, [ source, format, engine, options ] ]
+  // output = [ id, output ]
+  // output = [ id, [ "error", error ] ]
 
   this.onmessage = function (event) {
     if (!Array.isArray(event["data"])) {

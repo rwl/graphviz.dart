@@ -2,7 +2,7 @@ library graphviz;
 
 import 'dart:js' as js;
 import 'dart:async';
-import 'package:dispatched_worker/dispatched_worker.dart';
+import 'package:emscripten/emscripten.dart';
 
 enum Render { DOT, SVG, XDOT, PLAIN }
 
@@ -16,8 +16,11 @@ String _layoutString(Layout layout) {
   return layout.toString().split('.').last.toLowerCase();
 }
 
-String graphviz(String dotData, {Render render: Render.SVG,
-    Layout layout: Layout.DOT, List<String> options, js.JsObject context}) {
+String graphviz(String dotData,
+    {Render render: Render.SVG,
+    Layout layout: Layout.DOT,
+    List<String> options,
+    js.JsObject context}) {
   String format = _renderString(render);
   String engine = _layoutString(layout);
   js.JsObject ctx = (context != null) ? context : js.context;
@@ -25,16 +28,18 @@ String graphviz(String dotData, {Render render: Render.SVG,
 }
 
 class Graphviz {
-  final DispatchedWorker _worker;
+  final AsyncWorker _worker;
 
   Graphviz([String scriptUrl = 'packages/graphviz/graphviz.js'])
-      : _worker = new DispatchedWorker(scriptUrl);
+      : _worker = new AsyncWorker(scriptUrl);
 
-  Future<String> layout(String dotData, {Render render: Render.SVG,
-      Layout layout: Layout.DOT, List<String> options}) {
+  Future<String> layout(String dotData,
+      {Render render: Render.SVG,
+      Layout layout: Layout.DOT,
+      List<String> options}) {
     String format = _renderString(render);
     String engine = _layoutString(layout);
 
-    return _worker.send([dotData, format, engine]);
+    return _worker.post([dotData, format, engine]);
   }
 }
