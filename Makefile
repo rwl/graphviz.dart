@@ -28,7 +28,7 @@ OPTFLAG=-Oz
 VIZOPTS=-v $(OPTFLAG) --memory-init-file 0
 LIBOPTS=$(OPTFLAG)
 LIBDIR=$(CURDIR)/lib
-VIZJS=$(LIBDIR)/graphviz.js
+VIZJS=$(LIBDIR)/web/graphviz.js
 
 all: $(VIZJS)
 
@@ -141,3 +141,21 @@ purge: clean
 	rm -rf $(EPSRCDIR)
 	rm -rf $(ZLIBDIR)
 
+CFLAGS = -fPIC -std=c99 -Wall -Werror
+LIBS = -L/usr/lib/graphviz
+INCS = -I/usr/lib/dart/include -I/usr/include/graphviz
+#CFLAGS=‘pkg-config libgvc --cflags‘ -Wall -g -O2
+#LDFLAGS=‘pkg-config libgvc --libs‘
+
+native: cleannative lib/native/libgv_ext.so
+
+lib/native/graphviz_extension.o: lib/native/graphviz_extension.c
+	$(CC) $(CFLAGS) $(CDEFS) $(INCS) -DDART_SHARED_LIB -o $@ -c $<
+
+lib/native/libgv_ext.so: lib/native/graphviz_extension.o
+	$(CC) $(CFLAGS) $(CDEFS) $(LIBS) -shared -Wl,-soname,libgv_ext.so -o $@ $< -lgvc -lcgraph -lcdt \
+	-lgvplugin_core -lgvplugin_dot_layout -lgvplugin_neato_layout
+
+cleannative:
+	@( cd lib/native ; $(RM) *.o  )
+	@( cd lib/native ; $(RM) *.so )

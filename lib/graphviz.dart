@@ -1,45 +1,48 @@
-library graphviz;
+library graphviz.src;
 
-import 'dart:js' as js;
-import 'dart:async';
-import 'package:emscripten/emscripten.dart';
+class Render {
+  final value;
+  const Render._(this.value);
+  toString() => 'Render.$value';
 
-enum Render { DOT, SVG, XDOT, PLAIN }
+  static const DOT = const Render._('dot');
+  static const SVG = const Render._('svg');
+  static const XDOT = const Render._('xdot');
+  static const PLAIN = const Render._('plain');
 
-enum Layout { DOT, NEATO, CIRCO, FDP, SFDP, TWOPI }
-
-String _renderString(Render render) {
-  return render.toString().split('.').last.toLowerCase();
+  static const List<Render> values = const [
+    Render.DOT,
+    Render.SVG,
+    Render.XDOT,
+    Render.PLAIN
+  ];
 }
 
-String _layoutString(Layout layout) {
-  return layout.toString().split('.').last.toLowerCase();
+class Layout {
+  final value;
+  const Layout._(this.value);
+  toString() => 'Layout.$value';
+
+  static const DOT = const Layout._('dot');
+  static const NEATO = const Layout._('neato');
+  static const CIRCO = const Layout._('circo');
+  static const FDP = const Layout._('fdp');
+  static const SFDP = const Layout._('sfdp');
+  static const TWOPI = const Layout._('twopi');
+
+  static const List<Layout> values = const [
+    DOT,
+    NEATO,
+    CIRCO,
+    FDP,
+    SFDP,
+    TWOPI
+  ];
 }
 
-String graphviz(String dotData,
-    {Render render: Render.SVG,
-    Layout layout: Layout.DOT,
-    List<String> options,
-    js.JsObject context}) {
-  String format = _renderString(render);
-  String engine = _layoutString(layout);
-  js.JsObject ctx = (context != null) ? context : js.context;
-  return ctx.callMethod("Graphviz", [dotData, format, engine, options]);
-}
-
-class Graphviz {
-  final AsyncWorker _worker;
-
-  Graphviz([String scriptUrl = 'packages/graphviz/graphviz.js'])
-      : _worker = new AsyncWorker(scriptUrl);
-
-  Future<String> layout(String dotData,
+abstract class Graphviz {
+  String layout(String dotData,
       {Render render: Render.SVG,
       Layout layout: Layout.DOT,
-      List<String> options}) {
-    String format = _renderString(render);
-    String engine = _layoutString(layout);
-
-    return _worker.post([dotData, format, engine]);
-  }
+      List<String> options});
 }

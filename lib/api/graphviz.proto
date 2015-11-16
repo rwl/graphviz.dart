@@ -1,0 +1,33 @@
+syntax = "proto2";
+
+package graphviz.layout;
+
+enum Render {
+  GV_DOT = 1;
+  SVG = 2;
+  XDOT = 3;
+  PLAIN = 4;
+}
+
+enum Layout {
+  DOT = 1;
+  NEATO = 2;
+  CIRCO = 3;
+  FDP = 4;
+  SFDP = 5;
+  TWOPI = 6;
+}
+
+message LayoutRequest {
+  optional string data = 1;
+  optional Render render = 2;
+  optional Layout layout = 3;
+}
+
+message LayoutResponse {
+  optional string data = 1;
+}
+
+service LayoutService {
+  rpc Layout (LayoutRequest) returns (LayoutResponse);
+}

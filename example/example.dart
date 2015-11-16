@@ -1,28 +1,25 @@
 import 'dart:html';
 import 'dart:async';
 import 'package:graphviz/graphviz.dart';
+import 'package:graphviz/web/graphviz.dart';
 import 'package:graphviz/graphs.dart';
 
 Node inspect(String s) => new Element.pre()..appendText(s);
 
 Future<Node> example(Graphviz gv, String dotData, Render format,
-    [Layout engine = Layout.DOT]) {
-  var result;
-  return gv.layout(dotData, render: format, layout: engine).then((result) {
-    if (format == Render.SVG) {
-      final doc = new DomParser().parseFromString(result, 'text/xml');
-      return document.importNode(doc.documentElement, true);
-    } else {
-      return inspect(result);
-    }
-  }, onError: (e) {
-    return inspect(e.toString());
-  });
+    [Layout engine = Layout.DOT]) async {
+  var result = gv.layout(dotData, render: format, layout: engine);
+  if (format == Render.SVG) {
+    final doc = new DomParser().parseFromString(result, 'text/xml');
+    return document.importNode(doc.documentElement, true);
+  } else {
+    return inspect(result);
+  }
 }
 
 main() {
-  var gv1 = new Graphviz();
-  var gv2 = new Graphviz();
+  var gv1 = new WebGraphviz();
+  var gv2 = new WebGraphviz();
 
   example(gv1, cluster, Render.SVG).then((node) {
     document.body.appendHtml("<h1>Cluster (svg output)</h1>");
